@@ -12,13 +12,12 @@ RESULTS="${RESULTS_DIR}/results_net_vs_${TARGET_IP}.log"
 if [[ -n "$TARGET_IP" ]]; then
   echo "Running network benchmark against: $TARGET_IP"
 
-  # 1. Standard Test (Client sending to Server)
+  # Standard test (client sending to server)
   echo "Iperf3: Upload Speed (Current machine -> Server)"
   iperf3 -c "$TARGET_IP" -t 30 2>&1 | tee -a "$RESULTS"
 
-  # 2. Reverse Test (Server sending to Client)
+  # Reverse test (server sending to client)
   echo "Iperf3: Download Speed (Server -> Current machine)"
-  # The -R flag reverses the direction of traffic
   iperf3 -c "$TARGET_IP" -t 30 -R 2>&1 | tee -a "$RESULTS"
 
   echo "Ping: Latency Test"

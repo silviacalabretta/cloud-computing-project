@@ -15,7 +15,6 @@ SHARED_MOUNT="/shared/home"
 SHARED_FILE="$SHARED_MOUNT/iozone_shared_${NODE_NAME}.tmp"
 
 echo "Running IOZone Disk benchmark for: ${NODE_NAME}"
-
 echo "IOZone local filesystem test"
 
 iozone -a -I -s 102400 -r 1024 -f "$LOCAL_FILE" 2>&1 | tee -a "$RESULTS"
