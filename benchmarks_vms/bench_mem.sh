@@ -15,7 +15,7 @@ echo "Running Memory benchmarks"
 
 echo "Sysbench with Block=$BLOCK_SIZE, Total=$TOTAL_SIZE"
 
-sysbench --test=memory --threads=2 --memory-block-size=$BLOCK_SIZE --memory-total-size=$TOTAL_SIZE run | tee -a "$RESULTS"
+sysbench --test=memory --threads=2 --memory-block-size=$BLOCK_SIZE --memory-total-size=$TOTAL_SIZE run 2>&1 | tee -a "$RESULTS"
 
 # echo "Stress-ng on 2 workers for 1 min (load 500M)"
 

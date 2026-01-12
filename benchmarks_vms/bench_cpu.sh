@@ -14,7 +14,7 @@ echo "Running CPU benchmarks"
 
 echo "Sysbench with max-prime: $PRIME "
 
-sysbench --test=cpu --cpu-max-prime="$PRIME" --threads=2 run | tee -a "$RESULTS"
+sysbench --test=cpu --cpu-max-prime="$PRIME" --threads=2 run 2>&1 | tee -a "$RESULTS"
 
 # echo "Stress-ng basic"
 
