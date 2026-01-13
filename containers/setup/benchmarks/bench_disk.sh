@@ -9,7 +9,7 @@ NODE_NAME="${1:-machine}"
 RESULTS_DIR="/shared/data"
 mkdir -p "$RESULTS_DIR"
 
-RESULTS="${RESULTS_DIR}/results_disk_${NODE_NAME}.log"
+RESULTS="${RESULTS_DIR}/${NODE_NAME}_results_disk.log"
 LOCAL_FILE="/tmp/iozone_local.tmp"
 SHARED_MOUNT="/shared/home"
 SHARED_FILE="$SHARED_MOUNT/iozone_shared_${NODE_NAME}.tmp"

@@ -11,6 +11,7 @@ RUN apt-get update && \
         sysbench \
         iozone3 \
         iperf3 \
+        iputils-ping \
         netcat \
         openmpi-bin \
         libopenmpi-dev \
@@ -34,17 +35,11 @@ RUN ssh-keygen -A
 # MAYBE: Do not use PAM, which can cause issues in minimal container environments
 # RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
 
-# RUN mkdir -p /root/.ssh
-# RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -N ""
-# RUN cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys
-# RUN chmod 600 /root/.ssh/authorized_keys
+RUN mkdir -p /root/.ssh
 
 # Configure the root user's SSH to trust all hosts (useful for testing)
 RUN echo "Host *\n\tStrictHostKeyChecking no\n\tUserKnownHostsFile /dev/null" > /root/.ssh/config
 RUN chmod 600 /root/.ssh/config
-
-# Copy all the testing files
-# COPY Performance_Testing/ ./Performance_Testing/
 
 # Copy benchmark scripts into the image
 COPY benchmarks/ /root/benchmarks/

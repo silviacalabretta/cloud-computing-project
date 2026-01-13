@@ -26,7 +26,7 @@ docker exec -d master iperf3 -s
 sleep 3
 
 echo "Network test: node01 <-> master"
-docker exec node01 /root/benchmarks/bench_net.sh master
+docker exec node01 /root/benchmarks/bench_net.sh master node01
 
 # Stop iperf server on master
 docker exec master pkill iperf3
@@ -37,7 +37,7 @@ docker exec -d node01 iperf3 -s
 sleep 3
 
 echo "Network test: node02 <-> node01"
-docker exec node02 /root/benchmarks/bench_net.sh node01
+docker exec node02 /root/benchmarks/bench_net.sh node01 node02
 
 # Stop iperf server on node01
 docker exec node01 pkill iperf3

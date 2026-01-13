@@ -1,0 +1,54 @@
+services:
+  master:
+    build: .
+    hostname: master
+    container_name: master
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+    volumes:
+      - cluster-shared:/shared
+    networks:
+      - cluster-net
+  
+  node01:
+    build: .
+    hostname: node01
+    container_name: node01
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+    volumes:
+      - cluster-shared:/shared
+    networks:
+      - cluster-net
+    depends_on:
+      - master
+
+  node02:
+    build: .
+    hostname: node02
+    container_name: node02
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+    volumes:
+      - cluster-shared:/shared
+    networks:
+      - cluster-net
+    depends_on:
+      - master
+
+
+networks:
+  cluster-net:
+    driver: bridge
+
+volumes:
+  cluster-shared:
