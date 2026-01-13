@@ -1,3 +1,5 @@
 material/**
 total_results/**
 containers/results/**
+
+*.png

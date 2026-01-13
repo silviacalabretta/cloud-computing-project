@@ -1,0 +1,5 @@
+﻿label;Bitrate_up(Gbits/sec);Retr_up;Bitrate_down(Gbits/sec);Retr_down;rtt_avg(ms)
+vm_n04_m;1.35;6092;1.35;5945;1.314
+vm_n05_n04;1.45;6376;1.34;5775;1.398
+c_n01_m;45.8;2044;46.3;950;0.126
+c_n02_n01;50.3;4317;49.8;4486;0.102
