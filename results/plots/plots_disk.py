@@ -148,7 +148,7 @@ def plot_single_op_compare(df, op_name, filename):
 # --- Main Execution ---
 
 print("Loading Disk data...")
-disk = pd.read_csv("../disk_summary.csv", sep=";")
+disk = pd.read_csv("../data/disk_summary.csv", sep=";")
 
 # 1. Standard Plots
 print("Generating Standard Plots...")

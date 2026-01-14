@@ -133,7 +133,7 @@ def plot_throughput(df, filename):
 # --- Main Execution ---
 
 print("Loading Network data...")
-net = pd.read_csv("../net_summary.csv", sep=";")
+net = pd.read_csv("../data/net_summary.csv", sep=";")
 
 print("Generating Network RTT plot...")
 plot_rtt_grouped(net, "net_rtt.png")

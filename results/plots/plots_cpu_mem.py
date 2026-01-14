@@ -104,7 +104,7 @@ def plot_scatter(df, xlabel, title, filename):
 
 # 1. Process CPU Data
 print("Processing CPU data...")
-cpu = pd.read_csv("../cpu_summary.csv", sep=";")
+cpu = pd.read_csv("../data/cpu_summary.csv", sep=";")
 cpu_agg = get_aggregated_df(cpu, "events_per_sec", "lat_avg_ms")
 
 plot_bar_metric(cpu_agg, "throughput", "Events/sec", "CPU Throughput", "cpu_throughput.png")
@@ -113,7 +113,7 @@ plot_scatter(cpu_agg, "Throughput (events/s)", "CPU: Latency vs Throughput", "cp
 
 # 2. Process Memory Data
 print("Processing Memory data...")
-mem = pd.read_csv("../mem_summary.csv", sep=";")
+mem = pd.read_csv("../data/mem_summary.csv", sep=";")
 mem_agg = get_aggregated_df(mem, "operation_per_sec", "avg_lat(ms)")
 
 plot_bar_metric(mem_agg, "throughput", "Ops/sec", "Memory Throughput", "mem_throughput.png")
