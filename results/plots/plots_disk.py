@@ -47,6 +47,7 @@ simple_colors = {
 seq_ops = ["write", "rewrite", "read", "reread"]
 rand_ops = ["random_read", "random_write", "bkwd_read", "stride_read", "record_rewrite"]
 file_ops = ["fwrite", "frewrite", "fread", "freread"]
+seq_rand_ops = seq_ops + rand_ops
 all_ops = seq_ops + rand_ops + file_ops
 
 # --- Helper Functions ---
@@ -67,6 +68,7 @@ def get_op_data(df, ops_list):
 def plot_disk_ops(df, title, filename, figure_size=(14, 7), rot=0):
     fig, ax = plt.subplots(figsize=figure_size)
     df.plot(kind="bar", color=colors, width=0.85, rot=rot, zorder=3, ax=ax)
+    ax.tick_params(axis='x', labelsize=14)
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, linestyle='-', alpha=0.7)
     ax.set_ylabel("Throughput (KB/sec)")
@@ -128,7 +130,7 @@ def plot_single_op_compare(df, op_name, filename):
     ax.yaxis.grid(True, linestyle='-', alpha=0.7)
     
     ax.set_xticks(x)
-    ax.set_xticklabels([name for _, name in x_groups])
+    ax.set_xticklabels([name for _, name in x_groups], fontsize=14)
     ax.set_ylabel(f"{op_name.capitalize()} Throughput (KB/sec)")
     ax.set_title(f"Disk Performance Comparison: {op_name.capitalize()}")
     
@@ -155,6 +157,7 @@ print("Generating Standard Plots...")
 plot_disk_ops(get_op_data(disk, seq_ops), "Disk: Sequential Operations", "disk_sequential.png")
 plot_disk_ops(get_op_data(disk, rand_ops), "Disk: Random Operations", "disk_random.png")
 plot_disk_ops(get_op_data(disk, file_ops), "Disk: File Operations", "disk_file.png")
+plot_disk_ops(get_op_data(disk, seq_rand_ops), "Disk: Sequential and Random Operations", "disk_seq_rand.png", figure_size=(19, 7))
 plot_disk_ops(get_op_data(disk, all_ops), "Disk: All Operations Combined", "disk_all_combined.png", figure_size=(24, 8))
 
 # 2. NEW: Single Operation Comparison (4 Colors)
