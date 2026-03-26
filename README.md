@@ -1,9 +1,9 @@
-# Cloud Computing Project: VM vs. Container Cluster Comparison
+# Cloud Computing Project: VM vs. Container Cluster
 
-This project evaluates the performance trade-offs between traditional **Virtualization** (VirtualBox) and **Containerization** (Docker/WSL 2) in a clustered environment. By building two identical three-node clusters (1 Master, 2 Workers), we analyze how different abstraction layers impact CPU, memory, disk I/O, and network throughput under high-performance workloads.
+This project evaluates the performance trade-offs between traditional virtualization and containerization in a clustered environment. By building two identical three-node clusters (1 master, 2 workers), we analyze how different abstraction layers impact CPU, memory, disk I/O, and network throughput under high-performance workloads.
 
 ## Architecture & Setup
-Both environments were provisioned with identical resource constraints to ensure a fair comparison: **2 vCPUs** and **2048 MB RAM** per node.
+Both environments were provisioned with identical resource constraints to ensure a fair comparison: 2 vCPUs and 2048 MB RAM per node.
 
 ### 1. Virtual Machine Cluster
 * **Hypervisor:** VirtualBox.
@@ -28,22 +28,22 @@ We utilized a comprehensive suite of industry-standard tools to stress-test the 
 
 ---
 
-## Key Results at a Glance
+## Key Results
 Our analysis revealed that while CPU tasks perform almost identically, containers hold a massive advantage in communication-heavy and memory-intensive tasks.
 
-| Metric | Virtual Machines (VM) | Containers (Docker) | Performance Gap |
+| Metric | Virtual Machines | Containers | Performance gap |
 | :--- | :--- | :--- | :--- |
-| **Network Throughput** | $\approx 1.5$ Gbits/s  | $45-50$ Gbits/s  | **30x Faster**  |
-| **Network Latency (RTT)** | $\approx 1.35$ ms  | $\approx 0.1$ ms  | **13x Lower** |
-| **Memory Throughput** | $\approx 30,000$ ops/sec  | $\approx 45,000$ ops/sec  | **50% Higher** |
-| **HPCC Stability** | Failed at $N=512$  | Stable at $N=8192$  | **16x Scalability**  |
+| Network throughput | $\approx 1.5$ Gbits/s  | $45-50$ Gbits/s  | 30x faster  |
+| Network latency (RTT) | $\approx 1.35$ ms  | $\approx 0.1$ ms  | 13x lower |
+| Memory throughput | $\approx 30,000$ ops/sec  | $\approx 45,000$ ops/sec  | 50% higher |
+| HPCC stability | Failed at $N=512$  | Stable at $N=8192$  | 16x scalability  |
 
 > **Note:** The 30x network gap highlights the substantial overhead of full virtualization where packets must traverse the hypervisor and virtual switches. Containers benefit from sharing the host kernel and network stack via WSL 2.
 
 ---
 
 ## Technical Challenges & Stability
-A significant portion of this study focuses on the "Stability Gap". 
+A significant portion of this study focuses on the "stability gap". 
 * **Lock Holder Preemption:** Under extreme load (HPCC), the VM cluster suffered catastrophic failures, including RCU stalls and watchdog timeouts. This occurred because the host scheduler paused vCPUs holding critical kernel locks, causing others to "spin" indefinitely.
 * **vCPU Time Drift:** Stress-tests with `stress-ng` caused the VM's internal clock to desynchronize from real-time, rendering performance metrics invalid.
 
