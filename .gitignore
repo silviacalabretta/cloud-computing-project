@@ -1,5 +1,6 @@
 material/**
 total_results/**
 containers/results/**
+containers/hpcc_results/**
 notes.md
 hpcc/** 
